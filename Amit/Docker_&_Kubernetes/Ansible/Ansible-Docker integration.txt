@@ -1,0 +1,240 @@
+Ansible & Docker Integration
+=============================
+
+Ansible playbook to install on docker and docker-py
+
+vim playbook.yml
+
+---
+- name: Setup of docker for Ansible
+  hosts: all
+  tasks:
+   - name: Install pip
+     apt:
+      name: python-pip
+	state: present
+	update_cache: yes
+    - name: Download and install docker and also docker-py
+      shell: "{{item}}"
+      with_items:
+       - curl -fsSL https://get.docker.com -o get-docker.sh
+       - sh get-docker.sh
+       - pip install docker-py
+...
+   ********OR**********
+
+    - name: Download docker
+      shell: get.docker.com docker.sh file
+    - name: Install docker
+      shell: sh get-docker.sh
+    - name: Installl docker-py
+      shell: pip install docker-py
+...
+
+# ansible-playbook playbook.yml -b
+
+# docker run --name h1 -d httpd
+
+Now we want to create this httpd container on all nodes in cluster
+
+# vim playbook1.yml
+---
+- name: Working on docker containers
+  hosts: all
+  tasks:
+   - name: start a httpd container
+     docker_container:
+      image: httpd
+      name: h1
+...
+
+#ansible-playbook playbook1.yml -b
+
+Ansible playbook to start, stop and delete a container
+
+
+# vim playbook2.yml
+---
+- name: Working on docker containers
+  hosts: all
+  tasks:
+   - name: start a httpd container
+     docker_container:
+      image: httpd
+      name: h1
+   - name: stop the httpd container
+     docker_container:
+      name: h1
+      state: stopped
+   -name: Delete the httpd container
+    docker_container:
+     name: h1
+     state: absent
+...
+
+# ansible-playbook palybook2.yml -b
+
+
+
+Ansible playbook to create 10 nginx containers:
+#vim playbook3.yml
+---
+- name: start 10 nginx containers on all managed nodes
+  hosts: all
+  tasks:
+   - name: Create 10 nginx
+     docker_container:
+      image: nginx
+      name: "container{{item}}"
+     with_sequence: count=10
+...
+
+#ansible-playbook playbook3.yml -b
+
+For documentation:
+#ansible-doc docker_container
+
+
+# ansible all -m shell -a ' docker rm -f $(docker ps -aq) -b
+
+
+
+Ansible playbook to implement docker compose on managed nodes:
+#vim playbook4.yml
+---
+- name: Implementing docker compose using Ansible
+  hosts: all
+  tasks:
+   - name: Create a mysql container
+     docker_container:
+     name: mydb
+     image: mysql:5
+     env:
+      - MYSQL_ROOT_PASSWORD: amit
+   - name: Create a wordpress container
+     docker_container:
+      name: wordpress
+      image: wordpress
+      ports:   
+       - 5555: 80
+      links:
+       - mydb: mysql
+...
+
+# ansible-playbook playbook4.yml -b
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
