@@ -1,0 +1,173 @@
+CLASSES AND OBJECTS
+=====================
+
+A class is a logical entity which contains some variables and methods (functions).
+The elements present in a class can be accessed only after creating an object of the 
+class. 
+
+
+class calculator:
+	def add (self, a,b):
+		print (a+b)
+	def sub (self, a,b):
+		print (a-b)
+	def mul (self, a,b):
+		print (a*b)
+	def div (self, a,b):
+		print (a/b)
+	def quotient (self, a,b):
+		print (a//b)
+	def reminder (self, a,b):
+		print (a%b)
+	def exponent (self, a,b):
+		print (a**b)
+
+a = calculator()
+a.add(10,29)
+a.exponent(2,3)
+a.reminder(3,2)
+
+
+b = calculator()
+b.sub(20,10) etc
+=========================================================
+
+========
+MODULES
+========
+Modules are code libraries i.e. they are files which contain some functions and
+these functions can be used by importing these modules into other programs.
+
+Ex:
+---
+import math
+import calendar
+
+a=math.factorial(4)
+print(a)
+print(math.sqrt(4))
+print(math.pi)
+
+print(calendar.isleap(2020))
+print(calendar.month(2020,5))
+
+----------------------------------------------
+
+1st create a module program "functions.py":
+
+def area(length,breadth):
+	print (length*breadth)
+
+def permiter(length,breadth):
+	print((2*(length+breadth)))
+
+
+
+Create a program "sample.py" and import the module that we have created above:
+
+import functions
+or
+functions.path.append(path_to_file_module) <== if the module file is present on another directory.
+
+print ("Area of a rectangle is :")
+functions.area(5,10)
+
+print ("Perimeter of a rectable is : ")
+functions.perimeter(5,10)
+
+====================================================================
+
+
+PYTHON-DOCKER INTEGRATION:
+==========================
+Python program for pulling docker images
+
+vim pull.py
+import subprocess
+
+image=input ("Enter the name of the docker image: ")
+subprocess.call ("docker pull %s"%image, shell=True)
+
+save & close 
+
+#python3 pull.py
+
+------------------------------------------------
+
+Python program for downloading multiple images:
+
+vim pull_multiple.py
+import subprocess
+
+n=int(input("Enter the number of images to be downloaded: "))
+
+i = 1
+while i <= n:
+	image=input("Enter the image to be downloaded: ")
+	subprocess.call ("docker pull %s"%image,shell=True)
+	i = i + 1
+
+save & close
+
+#python3 pull_multiple.py
+-------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

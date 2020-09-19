@@ -1,0 +1,83 @@
+Python program to delete only the tomcat containers:
+
+import subprocess
+
+subprocess.call ('docker container ls | grep tomcat | cut -d " " -f 1 > file1', shell=True)
+
+contids = open ("file1",'r').readlines ()
+
+i = 0
+
+while i < len (contids):
+	cont_id=contids[i]
+	subprocess.call ("docker rm -f %s"%cont_id,shell=True)
+	i = i + 1
+--------------------------------------------------------------------------
+
+
+Alternative for docker compose
+Python program to create a new bridge network and start two containers, MySQL & 
+Wordpress on it. 
+
+import subprocess
+
+subprocess.call ("docker network create --driver bridge newnet",shell=True)
+
+subprocess.call (docker run --name mydb -d -e MYSQL_ROOT_PASSWORD=amit --network newnet mysql",shell=True)
+
+subprocess.call ("docker run --name mywordpress -d -P --network newnet wordpress",shell=True)
+
+-----------------------------------------------------------------------------
+
+Python script for creating multiple bridge networks and multiple tomcat containers
+on these networks.
+
+import subprocess
+
+i = 1
+while i <= 5:
+	subprocess.call ("docker network create --driver bridge intelliqit%d"%i,shell=True)
+	subprocess.call ("docker run tomcat%d -d --network intelliqit%d -P tomcat"%(i,i_,shell=True)
+
+	i = i + 1
+
+-------------------------------------------------------------------------------
+
+
+Interactive python script to accept the docker details from the user and create a
+container
+
+import subprocess
+
+image = input ("Enter the image name: ")
+container = input ("Enter the container name: ")
+ports = input ("Eneter the ports to be mapperd: ")
+detach = input ("Do you want to start in detached modes ---yes/no: ")
+
+if detach 'yes':
+	subprocess.call (docker run --name %s -d -p %s %s"%(container,ports,image),shell=True)
+elif detach == 'no':
+	subprocess.call (docker run --name %s -p %s %s"%(container,ports,image),shell=True)
+else:
+	print ("Invalid option")
+
+-------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

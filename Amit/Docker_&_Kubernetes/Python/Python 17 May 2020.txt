@@ -1,0 +1,146 @@
+#Writing (w) into a file
+data = "Welcome to IntelliQIT"
+file=open("C:/Users/amit/OneDrive/Desktop/file1.txt", "w")
+file.write(data)
+file.close()
+
+
+#Appending (a) data to a file
+data = "\n This ia file integrations with Python"
+file=open("C:/Users/amit/OneDrive/Desktop/file1.txt", "a")
+file.write(data)
+file.close()
+
+
+#Reading entire content of file as one string
+file=open("C:/Users/amit/OneDrive/Desktop/file1.txt", "r")
+data = file.read()
+print(data)
+
+
+#Reading entire file line by line
+file=open("C:/Users/amit/OneDrive/Desktop/file1.txt", "r")
+data = file.readlines()
+for x in data:
+	print(x)
+
+
+#Copying the content of one file to another
+f1 = open("C:/Users/amit/OneDrive/Desktop/file1.txt", "r")
+f2 = open("C:/Users/amit/OneDrive/Desktop/file2.txt", "w")
+
+data = f1.read()
+f2.write(data)
+
+
+
+
+#Copying the alternate lines from a file and saving in another file
+f1 = open ("C:/Users/amit/OneDrive/Desktop/file1.txt", "r")
+f3 = open ("C:/Users/amit/OneDrive/Desktop/file3.txt", "a")
+
+data = f1.readline ()
+i = 0
+
+while i < len(data):
+	f3.write(data[i])
+	i = i +2
+
+f1.close()
+f3.close()
+
+
+#Copying the content in reverse order
+f1 = open ("C:/Users/amit/OneDrive/Desktop/file1.txt", "r")
+f4 = open ("C:/Users/amit/OneDrive/Desktop/file4.txt", "a")
+
+data = f1.readline ()
+i = len (data) - 1
+
+while i > 0 :
+	f3.write(data[i])
+	i = i - 1
+
+f1.close()
+f4.close()
+
+
+#Functions
+Functions are used in python to make that code reusable. Functions are always
+created using the "def" keyword.
+Eg.:
+def add (a,b):
+	print (a+b)
+
+def sub(a,b):
+	print (a-b)
+
+add (20,10)
+sub (50,10)
+add (30,40)
+----------------------------------------------------------------------------------
+
+
+#Reuable functions to copy files
+def copy_file(srcfile,dstfile):
+	a = open (srcfile, 'r')
+	b = open (dstfile, 'w')
+	data  = a.read()
+	b.write(data)
+
+copy_file("C:/Users/amit/OneDrive/Desktop/file1.txt", "C:/Users/amit/OneDrive/Desktop/file2.txt")
+copy_file("C:/Users/amit/OneDrive/Desktop/ansible.txt", "C:/Users/amit/OneDrive/Desktop/newansible.txt")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
